@@ -6,7 +6,7 @@ function Header() {
   return (
     <Jumbotron>
       <Container>
-        <h1 className="display-1">Micro Blog</h1>
+        <h1 className="display-1">Microblog</h1>
         <p>Get in the Rithm of blogging</p>
         <Nav />
       </Container>
