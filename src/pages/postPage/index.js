@@ -1,8 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 
 function PostPage() {
   const { id } = useParams();
@@ -14,6 +13,8 @@ function PostPage() {
       <h1 className="lead">{post.description}</h1>
       <br />
       <p>{post.body}</p>
+      <Button variant="danger" className="mr-2">delete</Button>
+      <Button variant="secondary" className="mx-4">edit</Button>
     </Container>
   );
 }

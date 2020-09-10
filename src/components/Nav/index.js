@@ -4,14 +4,8 @@ import { NavLink } from 'react-router-dom';
 function Nav() {
   return (
     <nav>
-      <ul>
-        <li>
-          <NavLink exact to="/" >Blog</NavLink>
-        </li>
-        <li>
-          <NavLink exact to="/add-new-post">Add New Post</NavLink>
-        </li>
-      </ul>
+      <NavLink exact to="/"  className="mr-2">Blog</NavLink>
+      <NavLink exact to="/add-new-post" className="mx-3">New Post</NavLink>
     </nav>
   )
 }

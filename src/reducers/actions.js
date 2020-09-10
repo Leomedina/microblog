@@ -7,16 +7,18 @@
 import { ADD_BLOG, DELETE_BLOG } from './actionTypes';
 import { v4 as uuidv4 } from 'uuid';
 
-// export const addBlog = () => {
-//   return {
-//     type: ADD_TO_CART,
-//     payload: {
-//       cartId: uuidv4(),
-//       name,
-//       price,
-//     }
-//   };
-// };
+export const addBlog = (title, description, body) => {
+  return {
+    type: ADD_BLOG,
+    payload: {
+      id: uuidv4(),
+      title,
+      description,
+      body,
+      votes: 0
+    }
+  };
+};
 
 // export const deleteBlog = (cartId, price) => {
 //   return {
