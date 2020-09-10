@@ -14,7 +14,11 @@ export default function cart(state = INITIAL_STATE, action) {
         }
       };
     case DELETE_BLOG:
-      return state;
+      const newState = delete state[action.payload.id];
+      
+      return {
+        ...newState,
+      };
     default:
       return state;
   };

@@ -5,18 +5,26 @@ import {
   Button
 } from 'react-bootstrap';
 
-function PostComments({ comments }) {
+function PostComments({ comments, deleteCommentHandler }) {
+  const delBtnHandler = (comment) => {
+    deleteCommentHandler(comment);
+  };
+
   return (
     <ListGroup variant="flush">
-      {comments.map(comment =>
-        <>
+      {comments.map((comment, index) =>
+        <span key={index}>
           <ListGroupItem>
-            <Button size="sm" variant="outline-danger" className="px-2">X</Button>
+            <Button
+              size="sm"
+              variant="outline-danger"
+              className="px-2"
+              onClick={() => delBtnHandler(comment)}>X</Button>
             <span className="px-2">
               {comment}
             </span>
           </ListGroupItem>
-        </>)}
+        </span >)}
     </ListGroup>
   )
 }

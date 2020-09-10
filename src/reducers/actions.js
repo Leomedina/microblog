@@ -4,14 +4,20 @@
  * 
  */
 
-import { ADD_BLOG, ADD_COMMENT } from './actionTypes';
-import { v4 as uuidv4 } from 'uuid';
+import {
+  ADD_BLOG,
+  DELETE_BLOG,
+  ADD_COMMENT,
+  DELETE_COMMENT,
+  INIT_COMMENT
+} from './actionTypes';
 
-export const addBlog = (title, description, body) => {
+
+export const addBlog = (id, title, description, body) => {
   return {
     type: ADD_BLOG,
     payload: {
-      id: uuidv4(),
+      id,
       title,
       description,
       body,
@@ -20,6 +26,14 @@ export const addBlog = (title, description, body) => {
   };
 };
 
+export const deleteBlog = (id) => {
+  return {
+    type: DELETE_BLOG,
+    payload: {
+      id
+    }
+  };
+};
 
 /**
  *
@@ -34,5 +48,24 @@ export const addComment = (id, comment) => {
       id,
       comment
     }
-  }
-}
+  };
+};
+
+export const deleteComment = (id, comment) => {
+  return {
+    type: DELETE_COMMENT,
+    payload: {
+      id,
+      comment
+    }
+  };
+};
+
+export const initComments = (id) => {
+  return {
+    type: INIT_COMMENT,
+    payload: {
+      id
+    }
+  };
+};

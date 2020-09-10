@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container, Form, Button } from 'react-bootstrap';
 
-function NewPostForm({ addBlog }) {
+function NewPostForm({ handleAddBtn }) {
   const INITIAL_STATE = { title: "", description: "", body: "" };
   const [formData, setFormData] = useState(INITIAL_STATE);
   const history = useHistory();
@@ -18,7 +18,7 @@ function NewPostForm({ addBlog }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addBlog(formData.title, formData.description, formData.body);
+    handleAddBtn(formData.title, formData.description, formData.body);
     setFormData(INITIAL_STATE);
     history.push('/');
   };
