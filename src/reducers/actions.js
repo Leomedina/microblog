@@ -1,12 +1,8 @@
 
 import {
-  ADD_BLOG,
-  DELETE_BLOG,
-  LOAD_BLOGS,
-  UPDATE_BODY,
-  ADD_COMMENT,
-  DELETE_COMMENT,
-  INIT_COMMENT
+  ADD_BLOG, DELETE_BLOG, LOAD_BLOGS,
+  UPDATE_BODY, ADD_COMMENT, DELETE_COMMENT,
+  INIT_COMMENT, VOTE_UP 
 } from './actionTypes';
 
 import axios from 'axios';
@@ -47,8 +43,8 @@ export const loadBlogs = (blogs) => {
     payload: {
       blogs
     }
-  }
-}
+  };
+};
 
 export const updateBody = (id, body) => {
   return {
@@ -57,8 +53,18 @@ export const updateBody = (id, body) => {
       id,
       body,
     }
-  }
-}
+  };
+};
+
+export const voteRedux = (id, direction) => {
+  return {
+    type: direction,
+    payload: {
+      id,
+      direction
+    }
+  };
+};
 
 /**
  *
@@ -130,7 +136,15 @@ export const addBlog = (title, description, body) => {
 
 export const deleteBlog = (id) => {
   return async function (dispatch) {
-    const response = await axios.delete(`http://localhost:5000/api/posts/${id}`)
+    await axios.delete(`http://localhost:5000/api/posts/${id}`)
     dispatch(deleteBlogFromRedux(id));
   };
 };
+
+export const voteAPI = (id, direction) => {
+  let newDirection = VOTE_UP ? "up" : "down";
+  return async function (dispatch) {
+    await axios.post(`http://localhost:5000/api/posts/${id}/vote/${newDirection}`);
+    dispatch(voteRedux(id, direction));
+  }
+}

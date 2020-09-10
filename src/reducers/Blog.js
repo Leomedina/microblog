@@ -1,4 +1,4 @@
-import { ADD_BLOG, DELETE_BLOG, LOAD_BLOGS, UPDATE_BODY } from './actionTypes';
+import { ADD_BLOG, DELETE_BLOG, LOAD_BLOGS, UPDATE_BODY, VOTE_UP, VOTE_DOWN } from './actionTypes';
 import INITIAL_STATE from './initialBlogState';
 
 
@@ -10,7 +10,8 @@ export default function blog(state = INITIAL_STATE, action) {
         [action.payload.id]: {
           title: action.payload.title,
           description: action.payload.description,
-          body: action.payload.body
+          body: action.payload.body,
+          votes: 0
         }
       };
     case DELETE_BLOG:
@@ -25,7 +26,30 @@ export default function blog(state = INITIAL_STATE, action) {
         [id]: {
           title: state[id].title,
           description: state[id].description,
-          body: action.payload.body
+          body: action.payload.body,
+          votes: state[id].votes
+        }
+      };
+    case VOTE_UP:
+      const post_id = action.payload.id;
+      return {
+        ...state,
+        [post_id]: {
+          title: state[post_id].title,
+          description: state[post_id].description,
+          body: action.payload.body,
+          votes: state[post_id].votes + 1
+        }
+      };
+    case VOTE_DOWN:
+      const blog_id = action.payload.id;
+      return {
+        ...state,
+        [blog_id]: {
+          title: state[blog_id].title,
+          description: state[blog_id].description,
+          body: action.payload.body,
+          votes: state[blog_id].votes - 1
         }
       };
     case LOAD_BLOGS:
@@ -39,7 +63,6 @@ export default function blog(state = INITIAL_STATE, action) {
             votes: blog.votes,
           })
       })
-
       return {
         ...state,
         ...newBlogs
