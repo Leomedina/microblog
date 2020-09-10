@@ -1,10 +1,10 @@
 /**
  * 
- *  Actions for Blog and Comment Reducers 
+ *  Actions for Blog Reducer 
  * 
  */
 
-import { ADD_BLOG, DELETE_BLOG } from './actionTypes';
+import { ADD_BLOG, ADD_COMMENT } from './actionTypes';
 import { v4 as uuidv4 } from 'uuid';
 
 export const addBlog = (title, description, body) => {
@@ -20,12 +20,19 @@ export const addBlog = (title, description, body) => {
   };
 };
 
-// export const deleteBlog = (cartId, price) => {
-//   return {
-//     type: REMOVE_FROM_CART,
-//     payload: {
-//       cartId,
-//       price
-//     }
-//   };
-// };
+
+/**
+ *
+ * Actions for Comment Reducer
+ *
+ */
+
+export const addComment = (id, comment) => {
+  return {
+    type: ADD_COMMENT,
+    payload: {
+      id,
+      comment
+    }
+  }
+}
