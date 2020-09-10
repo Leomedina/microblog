@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { addComment, deleteBlog, deleteComment } from '../../reducers/actions'
+import { addComment, deleteBlog, deleteComment, initComments, updatePostBodyFromAPI } from '../../reducers/actions'
 import Comments from '../../components/PostComments';
 import NewCommentForm from '../../components/NewCommentForm';
 import {
@@ -14,7 +14,16 @@ function PostPage() {
   const history = useHistory();
   const dispatch = useDispatch()
   const post = useSelector(store => store.Blog[id])
-  const comments = useSelector(store => store.Comments[id].comments);
+  const comments = useSelector(store =>
+    store.Comments[id] ? store.Comments[id].comments : null
+  );
+
+  if (!comments) handleEmptyComments();
+  if (!post.body) dispatch(updatePostBodyFromAPI(id))
+
+  function handleEmptyComments() {
+    dispatch(initComments(id));
+  }
 
   const addCommentHandler = (comment) => {
     dispatch(addComment(id, comment))

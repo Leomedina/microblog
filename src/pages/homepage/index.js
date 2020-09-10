@@ -1,12 +1,18 @@
-import React from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { Container, CardGroup } from 'react-bootstrap';
 import BlogCard from '../../components/BlogCard';
 import { useHistory } from 'react-router-dom';
+import { getBlogsFromAPI } from '../../reducers/actions';
 
 function HomePage() {
   const blogs = useSelector(store => Object.entries(store.Blog), shallowEqual);
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    dispatch(getBlogsFromAPI())
+  }, [dispatch])
 
   return (
     <Container>
